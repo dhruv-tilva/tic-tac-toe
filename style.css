@@ -14,6 +14,55 @@
     margin-top: 50px;
 }
 
+.participants {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin: 20px 0;
+}
+
+#xField,
+#oField {
+    outline: none;
+    padding: 10px 15px;
+    font-size: 20px;
+}
+
+#startBtn {
+    padding: 10px 15px;
+    background-color: #d1a6fa;
+    cursor: pointer;
+    font-size: 20px;
+    border: 1px solid transparent;
+    color: white;
+}
+
+.winnerColor {
+    color: #d1a6fa !important;
+    animation: winningMoment;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes winningMoment {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .participants {
+        flex-direction: column;
+        align-items: baseline;
+        row-gap: 10px;
+    }
+}
+
 .container {
     display: grid;
     grid-template-rows: repeat(3, 10vw);
@@ -64,14 +113,12 @@
 }
 
 #reset {
-    margin: 0 23px;
-    padding: 8px 18px;
-    background: rgb(223, 252, 249);
-    border-radius: 6px;
+    padding: 10px 15px;
+    background-color: rgb(209, 166, 250);
     cursor: pointer;
-    font-size: 15px;
-    font-weight: bolder;
-    border: none;
+    font-size: 20px;
+    border: 1px solid transparent;
+    color: white;
 }
 
 .line {

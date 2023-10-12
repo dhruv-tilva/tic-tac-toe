@@ -1,6 +1,41 @@
-
-let turn = "X"
+import './prototype.js'
+let mainBox = document.getElementsByClassName("box");
+let xField = document.getElementById("xField");
+let oField = document.getElementById("oField");
+let startBtn = document.getElementById("startBtn");
+let isPlayer = false
+let turn = ""
 let isgameover = false;
+let isDraw = false
+let displayPlayer = "";
+
+
+
+let player = [
+    {
+        key: "X",
+        name: ""
+    },
+    {
+        key: "0",
+        name: ""
+    }
+]
+
+function showplayer() {
+    displayPlayer = player.filter(e => e.key === turn)[0].name;
+}
+startBtn.addEventListener("click", () => {
+    if (xField.value && oField.value) {
+        player[0].name = xField.value;
+        player[1].name = oField.value;
+        turn = "X"
+        isPlayer = true;
+        showplayer();
+        document.querySelector('.info').innerText = "Turn for " + displayPlayer
+    }
+})
+
 
 const changeTurn = () => {
     if (turn === "X") {
@@ -9,67 +44,70 @@ const changeTurn = () => {
         turn = "X"
     }
 }
-let innerBoxes = Array.from(document.getElementsByClassName("boxtext"))
+
 
 const checkWin = () => {
-    let boxtext = document.getElementsByClassName('boxtext');
     let wins = [
-        [0, 1, 2, 5, 5, 0],
-        [3, 4, 5, 5, 15, 0],
-        [6, 7, 8, 5, 25, 0],
-        [0, 3, 6, -5, 15, 90],
-        [1, 4, 7, 5, 15, 90],
-        [2, 5, 8, 15, 15, 90],
-        [0, 4, 8, 5, 15, 45],
-        [2, 4, 6, 5, 15, 135],
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
     ]
     wins.forEach(e => {
-        if ((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && (boxtext[e[0]].innerText !== "")) {
-            document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won"
-            isgameover = true
-            document.querySelector(".line").style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`
-            document.querySelector(".line").style.width = "20vw";
-        } else if (innerBoxes[0] !== "" && innerBoxes[1] !== "" && innerBoxes[2] !== "" && innerBoxes[3] !== "" && innerBoxes[4] !== "" && innerBoxes[5] !== "" && innerBoxes[6] !== "" && innerBoxes[7] !== "" && innerBoxes[8] !== "") {
-            // alert("Draw")
-            console.log("Draw");
+        if ((mainBox[e[0]].innerHTML === mainBox[e[1]].innerHTML) && (mainBox[e[2]].innerHTML === mainBox[e[1]].innerHTML) && (mainBox[e[0]].innerHTML !== "")) {
+            let ticTac = mainBox[e[1]].innerHTML
+            let winner = player.filter(e => e.key === ticTac)[0].name
+            // console.log(winner);
+            mainBox[e[0]].classList.add("winnerColor");
+            mainBox[e[1]].classList.add("winnerColor");
+            mainBox[e[2]].classList.add("winnerColor");
+
+            document.querySelector('.info').innerHTML = winner + " Won"
+            isgameover = true;
+            turn = ""
         }
     })
 }
 
+function checkDraw() {
+    if (mainBox[0].innerText !== "" && mainBox[1].innerText !== "" && mainBox[2].innerText !== "" && mainBox[3].innerText !== "" && mainBox[4].innerText !== "" && mainBox[5].innerText !== "" && mainBox[6].innerText !== "" && mainBox[7].innerText !== "" && mainBox[8].innerText !== "" && !isgameover) {
+        console.log("Draw");
+        isDraw = true
+        document.querySelector('.info').innerText = "Match is Draw!!"
+    }
+}
 
-let boxes = document.getElementsByClassName("box");
-Array.from(boxes).forEach(element => {
-    let boxtext = element.querySelector('.boxtext');
-    element.addEventListener('click', () => {
-        if (boxtext.innerText === '') {
-            boxtext.innerText = turn;
+
+
+mainBox.evt("click", function () {
+    if (this.innerText === '') {
+        this.innerText = turn;
+        if (isPlayer) {
             changeTurn();
+            showplayer();
             checkWin();
-            if (!isgameover) {
-                document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+            checkDraw();
+            if (!isgameover && !isDraw) {
+                document.getElementsByClassName("info")[0].innerText = "Turn for " + displayPlayer;
             }
         }
-    })
+    }
 })
 
-
-
-// Array.from(innerBoxes).forEach(element => {
-//     if (element.innerHTML !== "") {
-//         alert("Draw")
-//     }
-// })
-
-
-
 reset.addEventListener('click', () => {
-    let boxtexts = document.querySelectorAll('.boxtext');
-    Array.from(boxtexts).forEach(element => {
+    Array.from(mainBox).forEach(element => {
         element.innerText = ""
+        element.classList.remove("winnerColor");
     });
-    turn = "X";
+    turn = "";
     isgameover = false
-    document.querySelector(".line").style.width = "0vw";
-    document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
-    // document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "0px"
+    isPlayer = false
+    xField.value = ""
+    oField.value = ""
+    displayPlayer = ""
+    document.getElementsByClassName("info")[0].innerText = displayPlayer;
 })
