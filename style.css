@@ -148,3 +148,35 @@
         grid-template-columns: repeat(3, 20vw);
     }
 }
+
+#winnerList {
+    margin-left: 100px;
+    border-collapse: collapse;
+    color: white;
+    width: 250px;
+    text-align: center;
+    display: none;
+}
+
+#winnerList tr {
+    /* border: 1px solid black; */
+    width: 100%;
+}
+
+#winnerList tr th {
+    padding: 5px 10px;
+    font-size: 22px;
+}
+
+#winnerList tr:nth-child(1) {
+    background-color: rgb(204, 157, 249);
+}
+
+#winnerList tr {
+    background-color: rgb(226, 204, 247);
+}
+
+#winnerList tr td {
+    padding: 5px 10px;
+    font-size: 18px;
+}
