@@ -30,15 +30,20 @@
 
 #startBtn {
     padding: 10px 15px;
-    background-color: #d1a6fa;
     cursor: pointer;
     font-size: 20px;
     border: 1px solid transparent;
     color: white;
+    transition: all 0.3s;
+    background-color: #ba74fb;
+}
+
+#startBtn:hover {
+    background-color: #d1a6fa;
 }
 
 .winnerColor {
-    color: #d1a6fa !important;
+    color: #f5d65b !important;
     animation: winningMoment;
     animation-duration: 3s;
     animation-iteration-count: infinite;
@@ -80,7 +85,7 @@
 }
 
 .box:hover {
-    background-color: rgb(223, 252, 249);
+    background-color: #fbeeb9;
 }
 
 .info {
@@ -114,11 +119,16 @@
 
 #reset {
     padding: 10px 15px;
-    background-color: rgb(209, 166, 250);
     cursor: pointer;
     font-size: 20px;
     border: 1px solid transparent;
     color: white;
+    transition: all 0.3s;
+    background-color: #fad648;
+}
+
+#reset:hover {
+    background-color: #f6e087;
 }
 
 .line {

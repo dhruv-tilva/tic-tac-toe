@@ -8,7 +8,6 @@ let turn = ""
 let isgameover = false;
 let isDraw = false
 let displayPlayer = "";
-let winnerList = [];
 
 
 let player = [
@@ -61,7 +60,6 @@ const checkWin = () => {
         if ((mainBox[e[0]].innerHTML === mainBox[e[1]].innerHTML) && (mainBox[e[2]].innerHTML === mainBox[e[1]].innerHTML) && (mainBox[e[0]].innerHTML !== "")) {
             let ticTac = mainBox[e[1]].innerHTML
             let winner = player.filter(e => e.key === ticTac)[0].name;
-            winnerList.push(winner)
             // console.log(winner);
             mainBox[e[0]].classList.add("winnerColor");
             mainBox[e[1]].classList.add("winnerColor");
@@ -70,22 +68,6 @@ const checkWin = () => {
             document.querySelector('.info').innerHTML = winner + " Won"
             isgameover = true;
             turn = ""
-
-            let table = document.getElementById("winnerList");
-            if (winnerList.length > 0) {
-                table.style.display = "table"
-                let tr = document.createElement("tr");
-                let td = document.createElement("td");
-                td.innerText = winnerList[winnerList.length - 1];
-                tr.appendChild(td);
-                table.appendChild(tr);
-            }
-
-            if (winnerList.length > 5) {
-                winnerList.shift();
-                document.querySelectorAll("tr")[1].remove()
-            }
-            // console.log(winnerList);
         }
     })
 }
@@ -127,4 +109,4 @@ reset.addEventListener('click', () => {
     oField.value = ""
     displayPlayer = ""
     document.getElementsByClassName("info")[0].innerText = displayPlayer;
-})
+});

@@ -3,12 +3,3 @@ HTMLCollection.prototype.evt = function (eventName, cb) {
         this[i].addEventListener(eventName, cb)
     }
 }
-
-
-
-
-
-
-
-
-
